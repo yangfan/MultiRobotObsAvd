@@ -5,24 +5,19 @@ In this project, I use Deep Deterministic Policy Gradient (DDPG) to train multip
 ## Simulation Model
 
 The Simulink model is shown in figure below. This is a standard reinforcement learning setup consisting of agents interacting with envrionment in discrete timestep. At each time step t, the agents take action based on the observation. As a consequence of the action, the agents receive reward and find themself in new states.
+
 ![GitHub Logo](demo/model.png)
 
 In more details, in each agent we define the training networks using the specified deep neural network , i.e., actor and critic shown in figures below.
+
 ![GitHub Logo](demo/actorNetwork.png)
 ![GitHub Logo](demo/criticNetwork.png)
 
 The state is defined as a vector of 7 continuous variables ranging from 0 to 12. The action is defined as a vector of 2 continous variables ranging from -0.3 to 0.3.
 
 In the simulation envrionment below, we define the reward function and the transition function. 
-<div class="row justify-content-center">
-    <div class="col">
-          <img class="img-fluid z-depth-1" src="{{ '/projects/machine-learning/assets/img/collision-avoidance/env.png' | relative_url }}" alt=""/>
-    </div>
-</div>
-<div class="caption">
-Simulation Environment
-</div>
-<br/>
+
+![GitHub Logo](demo/env.png)
 
 Given the action returned by the policy, the differential-drive mobile robot model `differentialDriveKinematics` produces the current pose, which is sent to the `rangeSensor` function. Then the sensor readings are sent to robot. This part of model works as the transition function in MDP. 
 
@@ -41,7 +36,9 @@ In addition to the transition function and reward function, a contact-check modu
 The object of the training in this project is to enable mobile robots to avoid the obstacle. So the robots are supposed to move randomly without collision until the sample time end (which is defined to be 1000 time step). As shown in figures below, the performance of mobile robot is getting better, and the episode reward and elapsed time increase.
 
 ![GitHub Logo](demo/train88.gif)
+
 ![GitHub Logo](demo/train139.gif)
+
 ![GitHub Logo](demo/train148.gif)
 
 ## Running
